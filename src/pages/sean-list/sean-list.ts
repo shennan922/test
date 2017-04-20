@@ -19,11 +19,11 @@ export class SeanList {
 
    this.members=
    [
-     {id:<number>1,name:1 ,text:"shang"},
-     {id:<number>2,name:2 ,text:"shan"},
-     {id:<number>4,name:4 ,text:"da"},
-     {id:<number>3,name:3,text:"lao"},
-     {id:<number>5,name:5 ,text:"hu"},
+     {id:<number>1,name:1 ,text:"shang",url:"../assets/icon/1.png"},
+     {id:<number>2,name:2 ,text:"shan",url:"../assets/icon/2.png"},
+     {id:<number>4,name:4 ,text:"da",url:"../assets/icon/3.png"},
+     {id:<number>3,name:3,text:"lao",url:"../assets/icon/4.png"},
+     {id:<number>5,name:5 ,text:"hu",url:"../assets/icon/5.png"},
    ];
 
    

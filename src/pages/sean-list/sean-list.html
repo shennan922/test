@@ -14,10 +14,14 @@
 
 
 <ion-content padding>
-<ion-list  *ngFor="let user of members">
+  <ion-list >
+<ion-item  *ngFor="let user of members">
   
-    id:{{user.id}}    name:{{user.name}}    text:{{user.text}}
-    
+   <ion-avatar item-left >
+     <img src={{user.url}}>
+     </ion-avatar> 
+     <p>id:{{user.id}}</p>    <p>name:{{user.name}} </p>  <p> text:{{user.text}}</p>
+    </ion-item>
 </ion-list>
 <button block ion-button (click)='up()'>正序</button>
 <button block ion-button (click)='down()'>倒序</button>

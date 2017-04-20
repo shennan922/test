@@ -10,10 +10,10 @@ import { Sean } from '../sean/sean';
 })
 export class TabsPage {
 
-  tab1Root = Home;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
-  tab4Root = Sean;
+  tab1Root = Sean;
+  // tab2Root = AboutPage;
+  // tab3Root = ContactPage;
+  // tab4Root = Sean;
   constructor() {
 
   }
