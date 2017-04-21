@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{currentMember?"编辑会员":"新增会员"}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="returnToHistory()" style="font-size: 2.5rem!important;">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-item>
+  <ion-label floating>姓名</ion-label>
+  <ion-input [(ngModel)]="object.name"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label floating>昵称</ion-label>
+  <ion-input [(ngModel)]="object.disname"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label floating>dkp</ion-label>
+  <ion-input [(ngModel)]="object.dkp"></ion-input>
+</ion-item>
+
+
+<button block outline ion-button color="secondary" (click)="save()">保存</button>
+<button block outline ion-button color="primary" (click)="returnToHistory()">返回</button>
+</ion-content>

@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpModule } from '@angular/http'
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -9,6 +10,8 @@ import { Home } from '../pages/home/home';
 import { Sean } from '../pages/sean/sean';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { ProvidersModule } from '../providers/providers.module';
+import { SeanListModule } from '../pages/sean-list/sean-list.module';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -20,9 +23,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Home,
     Sean,
     TabsPage
+   
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    ProvidersModule,
+    SeanListModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -33,6 +40,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Home,
     Sean,
     TabsPage
+    
   ],
   providers: [
     StatusBar,

@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
-
-/**
- * Generated class for the Sean page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-//@IonicPage()
+import {SeanList} from '../sean-list/sean-list'
 @Component({
   selector: 'page-sean',
   templateUrl: 'sean.html',
@@ -35,7 +28,7 @@ export class Sean {
         },{
           text: '查看',
           handler: () => {
-            this.navCtrl.push("SeanList");
+            this.navCtrl.push(SeanList);
           }
         },{
           text: 'Cancel',

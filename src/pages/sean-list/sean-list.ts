@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SeanUser } from "../../providers/seanuser"
+import { PopoverController } from 'ionic-angular';
+import { MemberListPopover } from './list-popover';
+import { UserEdit } from '../user-edit/user-edit';
+import { AlertController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
-/**
- * Generated class for the SeanList page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-sean-list',
@@ -15,21 +15,59 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SeanList {
   members:Array<any>
   ids:Array<Number>
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    memberEditPage:any = UserEdit
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams,
+    public modalCtrl:ModalController,
+   public popCtrl:PopoverController,
+   public alertCtrl:AlertController,          
 
-   this.members=
-   [
-     {id:<number>1,name:1 ,text:"shang",url:"../assets/icon/1.png"},
-     {id:<number>2,name:2 ,text:"shan",url:"../assets/icon/2.png"},
-     {id:<number>4,name:4 ,text:"da",url:"../assets/icon/3.png"},
-     {id:<number>3,name:3,text:"lao",url:"../assets/icon/4.png"},
-     {id:<number>5,name:5 ,text:"hu",url:"../assets/icon/5.png"},
-   ];
+  private seanuser:SeanUser
+  ) {
+      this.seanuser.findClasses("seandemo").then(data=>{
+        if(data&&data.json().results){
+          console.log(data)
+          this.members = data.json().results
+        }
+    })
 
    
    
   }
-  
+
+       delete123(member)
+       {
+        let opts = {
+      title: '删除学员',
+      message: `请问您要删除当前学员${member.name}吗?`,
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+            console.log('Disagree clicked');
+            return
+          }
+        },
+        {
+          text: '确认',
+          handler: () => {
+                if(member&&member.objectId){
+                  this.seanuser.deleteClassById("seandemo",member.objectId).then(data=>{
+                    this.members.filter((item,index)=>{
+                      if(item.objectId == member.objectId){
+                        this.members.splice(index,1)
+                      }
+                      })
+                  })
+                }
+          }
+        }
+      ]
+    }
+    let deleteConfirm = this.alertCtrl.create(opts)
+    deleteConfirm.present()
+       }
+ 
   up()
   {
       this.members.sort(function (a, b) {
@@ -37,6 +75,36 @@ export class SeanList {
       });
   }
 
+      presentUserEditModal(member?){
+      let opts:any = {}
+      if(member){
+        opts.member = member
+      }
+          let userAdd = this.modalCtrl.create(this.memberEditPage,opts)
+          userAdd.onDidDismiss(data=>{
+            if(data){
+              this.members.push(data)
+            }
+          })
+          userAdd.present()
+    }
+  presentPopover(myEvent){
+    let popover = this.popCtrl.create(MemberListPopover);
+    popover.onDidDismiss(data=>{
+      console.log(data)
+      if(data){
+        if(data == "user") {
+          this.presentUserEditModal()
+        }
+        if(data == "top") {
+          return
+        }
+      }
+    })
+    popover.present({
+      ev: myEvent
+    });
+  }
     down()
   {
       this.members.sort(function (a, b) {
